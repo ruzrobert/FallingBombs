@@ -9,6 +9,8 @@ public class EnemyPawn : Pawn, IPoolerObject<EnemyPawnKey>
 
 	protected override void OnDeath()
 	{
+		base.OnDeath();
+
 		EnemyManager.Instance.UnRegisterEnemy(this);
 	}
 

@@ -21,18 +21,15 @@ public class PawnGraphics : MonoBehaviour, IPawnComponent
 	{
 		Pawn = pawn;
 
-		Pawn.Health.OnDamageReceived.AddListener(OnDamageReceived);
-		Pawn.Health.OnDeath.AddListener(OnDeath);
-
 		ResetState();
 	}
 
-	private void OnDamageReceived()
+	public void OnDamageReceived()
 	{
 		PlayDamageResponse();
 	}
 
-	private void OnDeath()
+	public void OnDeath()
 	{
 		PlayDeath();
 	}

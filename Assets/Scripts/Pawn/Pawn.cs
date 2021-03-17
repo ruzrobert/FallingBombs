@@ -11,15 +11,25 @@ public abstract class Pawn : MonoBehaviour
 
 	protected virtual void Awake()
 	{
-		Health.Setup(this);
-		Graphics.Setup(this);
+		if (health) health.Setup(this);
+		if (graphics) graphics.Setup(this);
 
-		Health.OnDeath.AddListener(OnDeath);
+		if (health)
+		{
+			health.OnDamageReceived.AddListener(OnDamageReceived);
+			health.OnDeath.AddListener(OnDeath);
+		}
+	}
+
+	protected virtual void OnDamageReceived()
+	{
+		if (graphics) graphics.OnDamageReceived();
 	}
 
 	protected virtual void OnDeath()
 	{
-		DestroyPawn();
+		if (graphics) graphics.OnDeath();
+		else DestroyPawn();
 	}
 
 	public virtual void DestroyPawn()
@@ -29,7 +39,7 @@ public abstract class Pawn : MonoBehaviour
 
 	public virtual void ResetState()
 	{
-		health.ResetState();
-		graphics.ResetState();
+		if (health) health.ResetState();
+		if (graphics) graphics.ResetState();
 	}
 }

@@ -103,7 +103,10 @@ public class ExploadableBomb : MonoBehaviour, IPoolerObject<ExploadableBombKey>
 					float damageT = Mathf.InverseLerp(explosionRadius, 0f, distanceToPawn);
 					float damageValue = explosionDamageCurve.Evaluate(damageT) * explosionCenterDamage;
 
-					pawn.Health.TakeDamage(damageValue);
+					if (pawn.Health)
+					{
+						pawn.Health.TakeDamage(damageValue);
+					}
 				}
 			}
 		}
