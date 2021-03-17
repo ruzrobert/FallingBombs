@@ -1,12 +1,9 @@
 ﻿using UnityEngine;
 
-public class GameEffect : MonoBehaviour, IPoolerObject<EffectKey>
+public class GameEffect : MonoBehaviour, IPoolerObject<EffectKey, GameEffect>
 {
     [Header("Components")]
     [SerializeField] private ParticleSystem[] particleSystems = new ParticleSystem[0];
-
-	[Header("Pooling")]
-	[SerializeField] private EffectKey poolingKey;
 
 	[Header("Life")]
 	[SerializeField] private bool freeAfterTime = false;
@@ -14,14 +11,14 @@ public class GameEffect : MonoBehaviour, IPoolerObject<EffectKey>
 
     [Header("Auto")]
     [SerializeField] private bool getChildParticleSystems = false; // inspector stuff
-
-	public EffectKey PoolingKey => poolingKey;
+	
+	public GameEffect PoolerPrefab { get; private set; }
 
 	private float startTime = 0f;
 
-	private void Start()
+	private void Awake()
 	{
-		ResetPooledObject();
+		ResetPooledObject(null);
 	}
 
 	private void Update()
@@ -54,8 +51,10 @@ public class GameEffect : MonoBehaviour, IPoolerObject<EffectKey>
 		}
 	}
 
-	public void ResetPooledObject()
+	public void ResetPooledObject(GameEffect originalPoolerPrefab)
 	{
+		PoolerPrefab = originalPoolerPrefab;
+
 		startTime = Time.time;
 	}
 }

@@ -43,8 +43,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfdf94e1ce36e11439903680e061e5f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objects:
-  - {fileID: 8534552353353052885, guid: 42cd69a616b1bff41b099e28963f4644, type: 3}
+  prefabs:
+  - key: {fileID: 11400000, guid: 10e740b5996ce3d4785184a4eab705b3, type: 2}
+    prefab: {fileID: 8534552353353052885, guid: 42cd69a616b1bff41b099e28963f4644,
+      type: 3}
 --- !u!1 &8454510597194669848
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,9 +139,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df1502d9ebf94724481d8bc6f1e99fb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objects:
-  - {fileID: 6442602928445090123, guid: b331453277554444a96c3a94a3b6849c, type: 3}
-  - {fileID: 6442602928445090123, guid: 100bd6795d0892641ac26e426caa27fe, type: 3}
+  prefabs:
+  - key: {fileID: 11400000, guid: 6aff250948f11de4aa7c7aa77caed29a, type: 2}
+    prefab: {fileID: 6442602928445090123, guid: b331453277554444a96c3a94a3b6849c,
+      type: 3}
+  - key: {fileID: 11400000, guid: 95009898ce0151f469949075b8354c21, type: 2}
+    prefab: {fileID: 6442602928445090123, guid: 100bd6795d0892641ac26e426caa27fe,
+      type: 3}
 --- !u!1 &9029114564783775451
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,7 +189,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e21f92ee5d64a7d449b607d35c6a4706, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objects:
-  - {fileID: 8487594807249205274, guid: d582776052b454c40a3c9bdc89dd1468, type: 3}
-  - {fileID: 2313177631962635391, guid: 21932a2e5c60bb7449cdff22bc0f8b98, type: 3}
-  - {fileID: 5757318295772734608, guid: 245c21495920a6c42845a48cfe7515d1, type: 3}
+  prefabs:
+  - key: {fileID: 11400000, guid: b658049df232ec54bab0e910652c3755, type: 2}
+    prefab: {fileID: 5757318295772734608, guid: 245c21495920a6c42845a48cfe7515d1,
+      type: 3}
+  - key: {fileID: 11400000, guid: 800a2cab060419f4a90e3b27b03b294b, type: 2}
+    prefab: {fileID: 2313177631962635391, guid: 21932a2e5c60bb7449cdff22bc0f8b98,
+      type: 3}
+  - key: {fileID: 11400000, guid: 50975f423ad84ee4d9305b1cc133802d, type: 2}
+    prefab: {fileID: 8487594807249205274, guid: d582776052b454c40a3c9bdc89dd1468,
+      type: 3}

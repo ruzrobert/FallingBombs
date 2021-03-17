@@ -1,38 +1,34 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Object = UnityEngine.Object;
 
-public abstract class KeyedObjectPooler<TKey, TObject> : MonoBehaviour where TKey : ObjectKey where TObject : Object, IPoolerObject<TKey>
+public abstract class KeyedObjectPooler<TKey, TObject> : MonoBehaviour where TKey : ObjectKey where TObject : Object, IPoolerObject<TKey, TObject>
 {
-	[Space]
-	[FormerlySerializedAs("prefabs")]
-	[SerializeField] private TObject[] objects = new TObject[0];
-
-	protected Dictionary<TKey, Queue<TObject>> pooledObjects = new Dictionary<TKey, Queue<TObject>>();
+	protected Dictionary<TObject, Queue<TObject>> pooledObjects = new Dictionary<TObject, Queue<TObject>>();
 
 	public virtual TObject GetObjectFromPool(TKey key)
 	{
-		TObject GetObjectInternal()
+		(TObject prefab, TObject instance) GetObjectInternal()
 		{
-			TObject poolObject = objects.FirstOrDefault(x => x.PoolingKey == key);
+			TObject poolPrefab = GetPrefabByKey(key);
 
-			if (pooledObjects.TryGetValue(key, out Queue<TObject> objectPool) && objectPool.Count > 0)
+			if (pooledObjects.TryGetValue(poolPrefab, out Queue<TObject> objectPool) && objectPool.Count > 0)
 			{
-				return objectPool.Dequeue();
+				return (poolPrefab, objectPool.Dequeue());
 			}
 			else
 			{
-				return CreateNewObject(poolObject);
+				return (poolPrefab, CreateNewObject(poolPrefab));
 			}
 		}
 
-		TObject instance = GetObjectInternal();
-		instance.ResetPooledObject();
+		(TObject prefab, TObject instance) = GetObjectInternal();
+		instance.ResetPooledObject(prefab);
 
 		return instance;
 	}
+
+	protected abstract TObject GetPrefabByKey(TKey key);
 
 	protected virtual TObject CreateNewObject(TObject poolObject)
 	{
@@ -49,9 +45,9 @@ public abstract class KeyedObjectPooler<TKey, TObject> : MonoBehaviour where TKe
 			transform.SetParent(this.transform);
 		}
 
-		if (pooledObjects.TryGetValue(poolObject.PoolingKey, out Queue<TObject> objectPool) == false)
+		if (pooledObjects.TryGetValue(poolObject.PoolerPrefab, out Queue<TObject> objectPool) == false)
 		{
-			objectPool = pooledObjects[poolObject.PoolingKey] = new Queue<TObject>();
+			objectPool = pooledObjects[poolObject.PoolerPrefab] = new Queue<TObject>();
 		}
 
 		objectPool.Enqueue(poolObject);

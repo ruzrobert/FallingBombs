@@ -1,13 +1,10 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class ExploadableBomb : MonoBehaviour, IPoolerObject<ExploadableBombKey>
+public class ExploadableBomb : MonoBehaviour, IPoolerObject<ExploadableBombKey, ExploadableBomb>
 {
 	[Header("Components")]
 	[SerializeField] private new Rigidbody rigidbody;
-
-	[Header("Pooling")]
-	[SerializeField] private ExploadableBombKey poolingKey;
 
 	[Header("Explosion")]
 	[SerializeField] private float explosionRadius = 5f;
@@ -20,8 +17,8 @@ public class ExploadableBomb : MonoBehaviour, IPoolerObject<ExploadableBombKey>
 	[Header("Effects")]
 	[SerializeField] private EffectKey explosionEffectKey;
 	[SerializeField, Min(0)] private float delayAfterEffect = 0f;
-
-	public ExploadableBombKey PoolingKey => poolingKey;
+	
+	public ExploadableBomb PoolerPrefab { get; private set; }
 
 	public bool IsExploded { get; private set; } = false;
 
@@ -77,7 +74,7 @@ public class ExploadableBomb : MonoBehaviour, IPoolerObject<ExploadableBombKey>
 			}
 
 			gameObject.SetActive(false);
-			ObjectPoolingManager.Instance.BombPooler.ReturnObjectToPool(this);
+			PoolingManager.Instance.BombPooler.ReturnObjectToPool(this);
 		}
 
 		StartCoroutine(Sequence());
@@ -149,8 +146,10 @@ public class ExploadableBomb : MonoBehaviour, IPoolerObject<ExploadableBombKey>
 		Gizmos.DrawWireSphere(transform.position, explosionRadius);
 	}
 
-	public void ResetPooledObject()
+	public void ResetPooledObject(ExploadableBomb originalPoolerPrefab)
 	{
+		PoolerPrefab = originalPoolerPrefab;
+
 		SaveDefaultsIfNeeded();
 
 		LoadDefaults();

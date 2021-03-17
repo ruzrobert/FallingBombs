@@ -48,7 +48,7 @@ public class EnemySpawner : MonoBehaviour
 
 		if (randomEnemyKey)
 		{
-			EnemyPawn enemy = ObjectPoolingManager.Instance.EnemyPooler.GetObjectFromPool(randomEnemyKey);
+			EnemyPawn enemy = PoolingManager.Instance.EnemyPooler.GetObjectFromPool(randomEnemyKey);
 
 			if (enemy)
 			{

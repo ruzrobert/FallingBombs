@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-public class ObjectPoolingManager : MonoBehaviour
+public class PoolingManager : MonoBehaviour
 {
-	public static ObjectPoolingManager Instance { get; private set; }
+	public static PoolingManager Instance { get; private set; }
 
 	[Space]
 	[SerializeField] private ExploadableBombPooler bombPooler = null;

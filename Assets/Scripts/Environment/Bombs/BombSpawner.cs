@@ -20,7 +20,7 @@ public class BombSpawner : MonoBehaviour
 
 			if (randomBombKey)
 			{
-				ExploadableBomb bomb = ObjectPoolingManager.Instance.BombPooler.GetObjectFromPool(randomBombKey);
+				ExploadableBomb bomb = PoolingManager.Instance.BombPooler.GetObjectFromPool(randomBombKey);
 
 				if (bomb)
 				{

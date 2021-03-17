@@ -1,11 +1,6 @@
-﻿using UnityEngine;
-
-public class EnemyPawn : Pawn, IPoolerObject<EnemyPawnKey>
+﻿public class EnemyPawn : Pawn, IPoolerObject<EnemyPawnKey, EnemyPawn>
 {
-	[Header("Pooling"), Header("Enemy")]
-	[SerializeField] private EnemyPawnKey poolingKey;
-
-	public EnemyPawnKey PoolingKey => poolingKey;
+	public EnemyPawn PoolerPrefab { get; private set; }
 
 	protected override void OnDeath()
 	{
@@ -18,11 +13,13 @@ public class EnemyPawn : Pawn, IPoolerObject<EnemyPawnKey>
 	{
 		gameObject.SetActive(false);
 
-		ObjectPoolingManager.Instance.EnemyPooler.ReturnObjectToPool(this);
+		PoolingManager.Instance.EnemyPooler.ReturnObjectToPool(this);
 	}
 
-	public void ResetPooledObject()
+	public void ResetPooledObject(EnemyPawn originalPoolerPrefab)
 	{
+		PoolerPrefab = originalPoolerPrefab;
+
 		ResetState();
 	}
 }

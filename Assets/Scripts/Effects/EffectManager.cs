@@ -11,7 +11,7 @@ public class EffectManager : MonoBehaviour
 
 	public void SpawnEffectAt(EffectKey effectKey, Vector3 position)
 	{
-		GameEffect effect = ObjectPoolingManager.Instance.EffectPooler.GetObjectFromPool(effectKey);
+		GameEffect effect = PoolingManager.Instance.EffectPooler.GetObjectFromPool(effectKey);
 
 		if (effect)
 		{
@@ -26,6 +26,6 @@ public class EffectManager : MonoBehaviour
 
 	public void FreeEffect(GameEffect effect)
 	{
-		ObjectPoolingManager.Instance.EffectPooler.ReturnObjectToPool(effect);
+		PoolingManager.Instance.EffectPooler.ReturnObjectToPool(effect);
 	}
 }
