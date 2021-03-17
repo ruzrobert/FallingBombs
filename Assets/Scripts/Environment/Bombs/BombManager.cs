@@ -20,4 +20,9 @@ public class BombManager : MonoBehaviour
 			ExplosionCheckResults[i] = null;
 		}
 	}
+
+	private void OnDestroy()
+	{
+		ClearExplosionCheckResults();
+	}
 }
