@@ -92,7 +92,7 @@ MonoBehaviour:
   enemyVariants:
   - {fileID: 11400000, guid: 10e740b5996ce3d4785184a4eab705b3, type: 2}
   spawnableArea: {x: 7, y: 7}
-  spawnPeriodicity: 1
+  spawnPeriodicity: 0.8
   maxEnemies: 5
 --- !u!1 &1760233960775509965
 GameObject:
@@ -310,10 +310,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bombVariants:
-  - {fileID: 11400000, guid: 95009898ce0151f469949075b8354c21, type: 2}
   - {fileID: 11400000, guid: 6aff250948f11de4aa7c7aa77caed29a, type: 2}
+  - {fileID: 11400000, guid: 95009898ce0151f469949075b8354c21, type: 2}
   spawnableArea: {x: 7, y: 7}
-  spawnPeriodicity: 0.75
+  spawnPeriodicity: 0.8
 --- !u!1 &1760233961591571449
 GameObject:
   m_ObjectHideFlags: 0
