@@ -43,10 +43,9 @@ public class InnerWallSpawner : MonoBehaviour
 
 		Vector3 localPosition = new Vector3();
 
-		const float WallStep = 1f; // probably won't be used anymore
 		Vector2 area = wallVariant.spawnableArea;
-		localPosition.x = Mathf.RoundToInt(Random.Range(-area.x, area.x) / WallStep) * WallStep;
-		localPosition.z = Mathf.RoundToInt(Random.Range(-area.y, area.y) / WallStep) * WallStep;
+		localPosition.x = Random.Range(-area.x, area.x);
+		localPosition.z = Random.Range(-area.y, area.y);
 		localPosition.y = 0f;
 
 		wall.localPosition = localPosition;
