@@ -12,6 +12,22 @@ public class BombSpawner : MonoBehaviour
 
 	private float nextSpawnTime = 0f;
 
+	private bool isEnabled = false;
+
+	private void Awake()
+	{
+		EventManager.Instance.GameState.OnGameStarted.AddListener(() => SetSpawnerEnabled(true));
+	}
+
+	private void Start()
+	{
+		// If enabled after the game is started
+		if (GameManager.Instance.IsGameStarted)
+		{
+			SetSpawnerEnabled(true);
+		}
+	}
+
 	private void Update()
 	{
 		if (bombVariants.Count > 0 && IsReadyToSpawn())
@@ -34,9 +50,14 @@ public class BombSpawner : MonoBehaviour
 		}
 	}
 
+	private void SetSpawnerEnabled(bool enabled)
+	{
+		isEnabled = enabled;
+	}
+
 	private bool IsReadyToSpawn()
 	{
-		return Time.time >= nextSpawnTime;
+		return isEnabled && Time.time >= nextSpawnTime;
 	}
 
 	private Vector3 GetRandomPosition()

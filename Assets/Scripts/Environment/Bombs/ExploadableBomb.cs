@@ -94,7 +94,7 @@ public class ExploadableBomb : MonoBehaviour, IPoolerObject<ExploadableBombKey, 
 
 			if (pawn)
 			{
-				if (IsPointBlockedByWall(pawn.transform.position + new Vector3(0f, 0.5f, 0f)) == false)
+				if (!IsPointBlockedByWall(pawn.transform.position + new Vector3(0f, 0.5f, 0f)))
 				{
 					float distanceToPawn = Vector3.Distance(pawn.transform.position, transform.position);
 					float damageT = Mathf.InverseLerp(explosionRadius, 0f, distanceToPawn);
@@ -157,7 +157,7 @@ public class ExploadableBomb : MonoBehaviour, IPoolerObject<ExploadableBombKey, 
 
 	private void SaveDefaultsIfNeeded()
 	{
-		if (defaultsSaved == false)
+		if (!defaultsSaved)
 		{
 			defaultsSaved = true;
 

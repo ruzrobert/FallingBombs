@@ -9,20 +9,5 @@ public class BombManager : MonoBehaviour
 	private void Awake()
 	{
 		Instance = this;
-
-		ClearExplosionCheckResults();
-	}
-
-	private void ClearExplosionCheckResults()
-	{
-		for (int i = 0; i < ExplosionCheckResults.Length; i++)
-		{
-			ExplosionCheckResults[i] = null;
-		}
-	}
-
-	private void OnDestroy()
-	{
-		ClearExplosionCheckResults();
 	}
 }

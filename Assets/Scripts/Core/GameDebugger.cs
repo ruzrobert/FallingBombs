@@ -8,7 +8,7 @@ public class GameDebugger : MonoBehaviour
 
 	private void Update()
 	{
-		if (editorOnly && Application.isEditor == false) return;
+		if (editorOnly && !Application.isEditor) return;
 
 		if (Input.GetKeyDown(KeyCode.R))
 		{
@@ -16,5 +16,8 @@ public class GameDebugger : MonoBehaviour
 		}
 	}
 
-	private void RestartScene() => SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+	private void RestartScene()
+	{
+		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+	}
 }

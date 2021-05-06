@@ -14,6 +14,22 @@ public class EnemySpawner : MonoBehaviour
 
 	private float nextEnemySpawnTime = 0f;
 
+	private bool isEnabled = false;
+
+	private void Awake()
+	{
+		EventManager.Instance.GameState.OnGameStarted.AddListener(() => SetSpawnerEnabled(true));
+	}
+
+	private void Start()
+	{
+		// If enabled after the game is started
+		if (GameManager.Instance.IsGameStarted)
+		{
+			SetSpawnerEnabled(true);
+		}
+	}
+
 	private void Update()
 	{
 		if (IsReadyToSpawn())
@@ -26,9 +42,14 @@ public class EnemySpawner : MonoBehaviour
 		}
 	}
 
+	private void SetSpawnerEnabled(bool enabled)
+	{
+		isEnabled = enabled;
+	}
+
 	private bool IsReadyToSpawn()
 	{
-		return EnemyManager.Instance.Enemies.Count < maxEnemies && Time.time >= nextEnemySpawnTime;
+		return isEnabled && EnemyManager.Instance.Enemies.Count < maxEnemies && Time.time >= nextEnemySpawnTime;
 	}
 
 	private Vector3 GetRandomPosition()

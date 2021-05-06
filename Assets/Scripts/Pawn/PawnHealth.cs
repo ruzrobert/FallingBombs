@@ -30,7 +30,7 @@ public class PawnHealth : MonoBehaviour, IPawnComponent
 
 	public void TakeDamage(float damage)
 	{
-		if (IsAlive == false || damage <= 0f)
+		if (!IsAlive || damage <= 0f)
 		{
 			return;
 		}

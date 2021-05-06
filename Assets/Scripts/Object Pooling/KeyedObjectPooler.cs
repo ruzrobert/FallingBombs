@@ -45,7 +45,7 @@ public abstract class KeyedObjectPooler<TKey, TObject> : MonoBehaviour where TKe
 			transform.SetParent(this.transform);
 		}
 
-		if (pooledObjects.TryGetValue(poolObject.PoolerPrefab, out Queue<TObject> objectPool) == false)
+		if (!pooledObjects.TryGetValue(poolObject.PoolerPrefab, out Queue<TObject> objectPool))
 		{
 			objectPool = pooledObjects[poolObject.PoolerPrefab] = new Queue<TObject>();
 		}

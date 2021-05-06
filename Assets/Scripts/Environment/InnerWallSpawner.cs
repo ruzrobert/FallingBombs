@@ -20,7 +20,7 @@ public class InnerWallSpawner : MonoBehaviour
 
 	private void Awake()
 	{
-		SpawnRandomInnerWalls();
+		EventManager.Instance.Loading.OnLoadLevel.AddListener(SpawnRandomInnerWalls);
 	}
 
 	private void SpawnRandomInnerWalls()
